@@ -3,5 +3,6 @@
 # http://git-scm.com/docs/gitignore
 
 .vscode/
+.env*
 npm-debug.log*
 node_modules/
