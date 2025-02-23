@@ -1,3 +1,5 @@
+**Prompt:** it项目采用graphql技术构建，用了apollo server组件，启动后，可以用apollo client 的query server通过浏览器进行手工测试，现在需要用ai大模型技术，结合robot的rpa模式完成自动测试，请给出详细的方案和实现步骤
+
 <think>
 
 好的，我现在需要帮助用户设计一个结合AI大模型和RPA的自动化测试方案，用于测试使用GraphQL和Apollo Server构建的IT项目。用户之前已经能够通过Apollo Client在浏览器中手动测试，现在希望自动化这个过程。
