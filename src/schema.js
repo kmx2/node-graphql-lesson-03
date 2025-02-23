@@ -1,28 +1,9 @@
-//* node-graphql/src/schema.js
+const { readFileSync } = require("fs");
+const { join } = require("path");
+const { gql } = require("apollo-server");
 
-const { gql } = require('apollo-server')
+const typeDefs = gql(
+  readFileSync(join(__dirname, "schema.graphql"), "utf8")
+);
 
-const typeDefs = gql`
-
-  type Student {
-    id: ID!
-    email: String!
-    fullName: String!
-    dept: String
-    enrolled: Boolean
-  }
-
-  type Query {
-    enrollment: [Student!]
-    students: [Student!]!
-    student(id: ID!): Student
-  }
-
-  type Mutation {
-    registerStudent(email: String!, fullName: String!, dept: String): Student!
-    enroll(id: ID!): Student
-  }
-`
-module.exports = {
-  typeDefs,
-}
+module.exports = { typeDefs };

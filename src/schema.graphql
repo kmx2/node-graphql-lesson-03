@@ -1,0 +1,105 @@
+
+scalar DateTime
+
+type Student {
+  id: ID!
+  email: String!
+  fullName: String!
+  enrolled: Boolean!
+  dept: Department!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Department {
+  id: ID!
+  name: String!
+  description: String
+  students: [Student!]!
+  courses: [Course!]!
+  teachers: [Teacher!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Teacher {
+  id: ID!
+  email: String!
+  fullName: String
+  courses: [Course!]!
+  type: TeacherType!
+  dept: Department
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input TeacherInput {
+  email: String!
+  fullName: String     # 改为可空，与类型定义保持一致
+  type: TeacherType!
+  departmentId: ID     # 添加部门ID字段
+}
+
+type Course {
+  id: ID!
+  code: String!
+  title: String!
+  description: String
+  teacher: Teacher
+  dept: Department
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+enum TeacherType {
+  FULLTIME
+  PARTTIME
+}
+
+input CourseWithoutTeacherInput {
+  code: String!
+  title: String!
+  description: String
+  departmentId: ID
+}
+
+type PaginatedStudents {
+  students: [Student!]!
+  total: Int!
+  totalPages: Int!
+  currentPage: Int!
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+}
+
+type Query {
+  students(page: Int, pageSize: Int): PaginatedStudents!
+  student(id: ID!): Student
+  isEnrolled(studentId: ID!): Boolean!
+  departments: [Department!]!
+  department(id: ID!): Department
+  teachers: [Teacher!]!
+  teacher(id: ID!): Teacher
+  courses: [Course!]!
+  course(id: ID!): Course
+}
+
+type Mutation {
+  registerStudent(email: String!, fullName: String!, departmentId: ID!): Student!
+  enrollStudent(id: ID!, enrolled: Boolean = true): Student!
+  updateStudent(id: ID!, email: String, fullName: String, enrolled: Boolean): Student!
+  deleteStudent(id: ID!): Student!
+  
+  createDepartment(name: String!, description: String): Department!
+  updateDepartment(id: ID!, name: String, description: String): Department!
+  deleteDepartment(id: ID!): Department!
+  
+  createTeacher(input: TeacherInput!): Teacher!
+  updateTeacher(id: ID!, input: TeacherInput!): Teacher!
+  deleteTeacher(id: ID!): Teacher!
+  assignCourse(teacherId: ID!, courseId: ID!): Course!
+  
+  createCourse(input: CourseWithoutTeacherInput!): Course!
+  updateCourse(id: ID!, input: CourseWithoutTeacherInput!): Course!
+  deleteCourse(id: ID!): Course!
+}

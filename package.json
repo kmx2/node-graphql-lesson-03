@@ -1,21 +1,29 @@
 {
-  "name": "graphql",
+  "name": "node-graphql",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start":  "node src/"
+    "test": "jest",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "seed": "node prisma/seed.js"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "@prisma/client": "^6.2.1",
-    "apollo-server": "^3.13.0",
-    "graphql": "^16.10.0"
+    "apollo-server": "^3.12.0",
+    "dataloader": "^2.2.3",
+    "graphql": "^16.8.0",
+    "jest": "^29.7.0"
   },
   "devDependencies": {
+    "nodemon": "^3.0.2",
     "prisma": "^6.2.1"
   }
 }
